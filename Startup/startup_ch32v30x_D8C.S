@@ -369,7 +369,11 @@ handle_reset:
     csrw 0x804, t0
 
     /* Enable floating point and interrupt */
-    li t0, 0x6088           
+    #if defined(START_AS_MACHINE_MODE)
+    li t0, 0x7888
+    #else
+    li t0, 0x6088
+    #endif
     csrw mstatus, t0
     #endif
 
